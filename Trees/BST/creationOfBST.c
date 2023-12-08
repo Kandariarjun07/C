@@ -25,15 +25,18 @@ node *insertInBST(node *root, int data)
     }
     return root;
 }
+// queue creation of LevelOrder traversal
 typedef struct queue
 {
+    // since it will hold node so pointer to node is required
     node *data;
     struct queue *next;
 } queue;
-queue *enqueue(queue *q, node *root)
+queue *enqueue(queue *q, node *treeNode)
 {
+    // creating node and assigning it incoming node value
     queue *temp = (queue *)malloc(sizeof(queue));
-    temp->data = root;
+    temp->data = treeNode;
     temp->next = NULL;
     if (q == NULL)
     {
@@ -42,6 +45,7 @@ queue *enqueue(queue *q, node *root)
     else
     {
         queue *ptr = q;
+        // looping till we reach last node
         while (ptr->next != NULL)
         {
             ptr = ptr->next;
@@ -56,8 +60,11 @@ node *dequeue(queue **q)
     {
         return NULL;
     }
+    // temporarily storing root value in temp
     node *temp = (*q)->data;
+    // for freeing front pointer
     queue *ptr = *q;
+    // dequeing
     *q = (*q)->next;
     free(ptr);
     return temp;
@@ -71,6 +78,7 @@ void levelOrdertraversal(node *root)
     if (root == NULL)
         return;
     queue *q = NULL;
+    // storing first element
     q = enqueue(q, root);
     while (!isEmpty(q))
     {

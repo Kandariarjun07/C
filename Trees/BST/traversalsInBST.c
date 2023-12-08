@@ -10,16 +10,18 @@ node *insertInBST(node *root, int data)
 {
     if (root == NULL)
     {
+        //creating a node and assigning it to root
         root = (node *)malloc(sizeof(node));
         root->data = data;
         root->left = NULL;
         root->right = NULL;
     }
-    else if (data < root->data)
+    else if (data < root->data) // Lesser value goes to left
     {
+
         root->left = insertInBST(root->left, data);
     }
-    else
+    else // Greater value goes to right side
     {
         root->right = insertInBST(root->right, data);
     }
@@ -53,8 +55,66 @@ void postorder(node*root){
     postorder(root->right);
     printf("%d ", root->data);
 }
+typedef struct queue
+{
+    node *data;
+    struct queue *next;
+} queue;
+queue *enqueue(queue *q, node *root)
+{
+    queue *temp = (queue *)malloc(sizeof(queue));
+    temp->data = root;
+    temp->next = NULL;
+    if (q == NULL)
+    {
+        q = temp;
+    }
+    else
+    {
+        queue *ptr = q;
+        while (ptr->next != NULL)
+        {
+            ptr = ptr->next;
+        }
+        ptr->next = temp;
+    }
+    return q;
+}
+node *dequeue(queue **q)
+{
+    if (*q == NULL)
+    {
+        return NULL;
+    }
+    node *temp = (*q)->data;
+    queue *ptr = *q;
+    *q = (*q)->next;
+    free(ptr);
+    return temp;
+}
+int isEmpty(queue *q)
+{
+    return q == NULL;
+}
 void levelOrdertraversal(node *root)
 {
+    if (root == NULL)
+        return;
+    queue *q = NULL;
+    q = enqueue(q, root);
+    while (!isEmpty(q))
+    {
+        node *temp = dequeue(&q);
+        printf("%d ", temp->data);
+        if (temp->left != NULL)
+        {
+            q = enqueue(q, temp->left);
+        }
+        if (temp->right != NULL)
+        {
+            q = enqueue(q, temp->right);
+        }
+    }
 }
 int main()
 {
@@ -76,6 +136,8 @@ int main()
     preorder(root);
     printf("\nPostorder Traversal : ");
     postorder(root);
+    printf("\nLevel Order Traversal : ");
+    levelOrdertraversal(root);
     // 10 7 6 9 8 4 5 13 15 11 12 14 16 -1
     return 0;
 }
