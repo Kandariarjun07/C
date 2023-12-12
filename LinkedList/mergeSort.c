@@ -36,24 +36,6 @@ void display(node *head)
     }
     printf("\n");
 }
-int getMax(node *head)
-{
-    if (head == NULL)
-    {
-        printf("Nothing to display!\n");
-        return -1;
-    }
-    int max = INT_MIN;
-    while (head)
-    {
-        if ((head->data) > max)
-        {
-            max = head->data;
-        }
-        head = head->next;
-    }
-    return max;
-}
 node *getMiddle(node *head)
 {
     if (head == NULL || head->next == NULL)
