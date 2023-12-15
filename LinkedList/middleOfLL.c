@@ -57,19 +57,29 @@ int deleteNode(node **head)
     temp->next = NULL;
     free(temp);
 }
+int getMiddle(node*head){
+    node *fast = head;
+    node *slow = head;
+    while (fast && fast->next)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    return slow->data;
+}
 int main()
 {
     node *head = NULL;
     node *tail = NULL;
     insert(&head, &tail, 10);
-    display(head);
-
     insert(&head, &tail, 20);
-    display(head);
-
     insert(&head, &tail, 30);
-    display(head);
-
     insert(&head, &tail, 40);
+    insert(&head, &tail, 50);
+    insert(&head, &tail, 60);
     display(head);
+    printf("Middle element of LL is : %d\n", getMiddle(head));
+    insert(&head, &tail, 70);
+    display(head);
+    printf("Middle element of LL is : %d\n", getMiddle(head));
 }
