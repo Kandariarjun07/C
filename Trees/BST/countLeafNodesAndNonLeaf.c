@@ -94,6 +94,24 @@ void levelOrdertraversal(node *root)
         }
     }
 }
+void countLeaveNodes(node *root, int *cnt)
+{
+    if (root == NULL)
+        return;
+    if (root->left == NULL && root->right == NULL)
+        (*cnt)++;
+    countLeaveNodes(root->left, cnt);
+    countLeaveNodes(root->right, cnt);
+}
+void countNonLeaveNodes(node *root, int *cnt)
+{
+    if (root == NULL)
+        return;
+    if (!(root->left == NULL && root->right == NULL))
+        (*cnt)++;
+    countNonLeaveNodes(root->left, cnt);
+    countNonLeaveNodes(root->right, cnt);
+}
 int main()
 {
 
@@ -111,6 +129,10 @@ int main()
     }
     levelOrdertraversal(root);
     // 10 7 6 9 8 4 5 13 15 11 12 14 16 -1
-    
+    int cntLeaves = 0, cntNonLeaves = 0;
+    countLeaveNodes(root, &cntLeaves);
+    printf("\n%d", cntLeaves);
+    countNonLeaveNodes(root, &cntNonLeaves);
+    printf("\n%d", cntNonLeaves);
     return 0;
 }
