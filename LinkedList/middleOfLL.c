@@ -72,15 +72,15 @@ int main()
 {
     node *head = NULL;
     node *tail = NULL;
-    insert(&head, &tail, 10);
-    insert(&head, &tail, 20);
-    insert(&head, &tail, 30);
-    insert(&head, &tail, 40);
-    insert(&head, &tail, 50);
-    insert(&head, &tail, 60);
-    display(head);
-    printf("Middle element of LL is : %d\n", getMiddle(head));
-    insert(&head, &tail, 70);
+    printf("Enter numbers of elements to insert : ");
+    int n, ele;
+    scanf("%d", &n);
+    printf("Enter data seperated by space : ");
+    for (int i = 0; i < n; i++)
+    {
+        scanf("%d", &ele);
+        insert(&head, &tail, ele);
+    }
     display(head);
     printf("Middle element of LL is : %d\n", getMiddle(head));
 }

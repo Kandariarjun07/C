@@ -114,14 +114,18 @@ int main()
 {
     node *head = NULL;
     node *tail = NULL;
-    insert(&head, &tail, 1);
-    insert(&head, &tail, 1032);
-    insert(&head, &tail, 123);
-    insert(&head, &tail, -2332);
-    insert(&head, &tail, 0);
-    insert(&head, &tail, 0);
+    printf("Enter numbers of elements to insert : ");
+    int n, ele;
+    scanf("%d", &n);
+    printf("Enter data seperated by space : ");
+    for (int i = 0; i < n; i++){
+        scanf("%d",&ele);
+        insert(&head, &tail, ele);
+    }
+    printf("Given Linked List : ");
     display(head);
     head = mergeSort(head);
+    printf("Linked List after Sorting : ");
     display(head);
     return 0;
 }

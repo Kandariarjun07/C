@@ -83,17 +83,28 @@ int main()
     node *tail1 = NULL;
     node *head2 = NULL;
     node *tail2 = NULL;
-
-    insert(&head1, &tail1, 1);
-    insert(&head1, &tail1, 3);
-    insert(&head1, &tail1, 5);
-    insert(&head1, &tail1, 7);
-    insert(&head2, &tail2, 2);
-    insert(&head2, &tail2, 4);
-    insert(&head2, &tail2, 6);
-    insert(&head2, &tail2, 8);
+    int n1, n2, ele1, ele2;
+    printf("Enter number of elements for first list : ");
+    scanf("%d", &n1);
+    printf("Enter the elements of first list: ");
+    for (int i = 0; i < n1; i++){
+        scanf("%d", &ele1);
+        insert(&head1, &tail1, ele1);
+    }
+    printf("Enter number of elements for second list : ");
+    scanf("%d", &n2);
+    printf("Enter the elements of second list: ");
+    for (int j = 0; j < n2; j++){
+        scanf("%d", &ele2);
+        insert(&head2, &tail2, ele2);
+    }
+    printf("First linked list : ");
+    display(head1);
+    printf("Second linked list : ");
+    display(head2);
     node *mergeHead = NULL;
     node *mergeTail = NULL;
     merge(&mergeHead, &mergeTail, head1, head2);
+    printf("Merged Linked List is : ");
     display(mergeHead);
 }
