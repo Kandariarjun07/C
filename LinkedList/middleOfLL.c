@@ -57,7 +57,8 @@ int deleteNode(node **head)
     temp->next = NULL;
     free(temp);
 }
-int getMiddle(node*head){
+int getMiddle(node *head)
+{
     node *fast = head;
     node *slow = head;
     while (fast && fast->next)
