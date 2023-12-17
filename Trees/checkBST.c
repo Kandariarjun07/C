@@ -23,26 +23,20 @@ struct Node *createNode(int value)
     newNode->right = NULL;
     return newNode;
 }
-
-bool checkBSTFast(struct Node *root, int l, int h)
+bool isBST(struct Node *root,int l,int h)
 {
     if (root == NULL)
         return true;
     if (root->data > l && root->data < h)
     {
-        bool left = checkBSTFast(root->left, l, root->data);
-        bool right = checkBSTFast(root->right, root->data, h);
+        bool left = isBST(root->left, l, root->data);
+        bool right = isBST(root->right, root->data, h);
         return left && right;
     }
     else
     {
         return false;
     }
-}
-
-bool isBST(struct Node *root)
-{
-    return checkBSTFast(root, INT_MIN, INT_MAX);
 }
 
 struct Node *insert(struct Node *root)
@@ -85,7 +79,7 @@ int main()
     postorderTraversal(root);
     printf("\n");
 
-    if (isBST(root))
+    if (isBST(root,INT_MIN,INT_MAX))
     {
         printf("The binary tree is a Binary Search Tree (BST).\n");
     }
