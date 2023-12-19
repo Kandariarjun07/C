@@ -168,7 +168,6 @@ void levelOrdertraversal(node *root)
         }
     }
 }
-
 void preorderIterative(node *root)
 {
     if (root == NULL)
